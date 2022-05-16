@@ -55,9 +55,9 @@ function selectColor(color)
     main.setTextColour(color)
 end
 
---Change "back" to the position/name of the main monitor
+--Change "back" with the position/name of the main monitor
 main = peripheral.wrap("back")
---Change "monitor_3" to the position/name of the second monitor
+--Change "monitor_3" with the position/name of the second monitor
 select = peripheral.wrap("monitor_3")
 
 --Make a white board
