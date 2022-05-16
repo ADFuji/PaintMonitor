@@ -1,0 +1,72 @@
+--Clear a monitor
+function clearMonitor(monitor)
+    monitor.setBackgroundColor(colors.white)
+    monitor.setTextColor(colors.white)
+    monitor.clear()
+end
+
+--Draw pixel
+function draw(x,y)
+    main.setCursorPos(x,y)
+    main.write("a")
+end
+
+--check position on the second screen to set the color
+function setColor(x,y)
+    if (x <= 2 and x >=1) and (y <= 2 and y >=1)
+    then clearMonitor(main)
+    elseif (x <= 5 and x >=4) and (y <= 2 and y >=1)
+    then selectColor(colors.white)
+    elseif (x <= 8 and x >=7) and (y <= 2 and y >=1)
+    then selectColor(colors.orange)
+    elseif (x <= 11 and x >=10) and (y <= 2 and y >=1)
+    then selectColor(colors.magenta)
+    elseif (x <= 14 and x >=13) and (y <= 2 and y >=1)
+    then selectColor(colors.lightBlue)
+    elseif (x <= 17 and x >=16) and (y <= 2 and y >=1)
+    then selectColor(colors.yellow)
+    elseif (x <= 2 and x >=1) and (y <= 5 and y >=4)
+    then selectColor(colors.pink)
+    elseif (x <= 5 and x >=4) and (y <= 5 and y >=4)
+    then selectColor(colors.gray)
+    elseif (x <= 8 and x >=7) and(y <= 5 and y >=4)
+    then selectColor(colors.lightGray)
+    elseif (x <= 11 and x >=10) and (y <= 5 and y >=4)
+    then selectColor(colors.cyan)
+    elseif (x <= 14 and x >=13) and (y <= 5 and y >=4)
+    then selectColor(colors.purple)
+    elseif (x <= 17 and x >=16) and (y <= 5 and y >=4)
+    then selectColor(colors.blue)
+    elseif (x <= 2 and x >=1) and (y <= 8 and y >=7)
+    then selectColor(colors.green)
+    elseif (x <= 5 and x >=4) and (y <= 8 and y >=7)
+    then selectColor(colors.red)
+    elseif (x <= 8 and x >=7) and (y <= 8 and y >=7)
+    then selectColor(colors.black)
+    elseif (x <= 11 and x >=10) and (y <= 8 and y >=7)
+    then selectColor(colors.brown)
+    else selectColor(colors.white)
+    end
+end
+
+--Set the good color
+function selectColor(color)
+    main.setBackgroundColour(color)
+    main.setTextColour(color)
+end
+
+--Change "back" to the position/name of the main monitor
+main = peripheral.wrap("back")
+--Change "monitor_3" to the position/name of the second monitor
+select = peripheral.wrap("monitor_3")
+
+--Make a white board
+main.setBackgroundColor(colors.white)
+main.clear()
+
+--Main loop
+while true do
+    local event, side,x ,y = os.pullEvent("monitor_touch")
+    if side=="back" then draw(x,y) --if event on main monitor then draw pixel
+    else setColor(x,y) end --else change color
+end
